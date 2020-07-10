@@ -5,10 +5,6 @@ const postModel = require('../Models/postModel');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('we are on post');
-});
-
 //POST A POST
 router.post('/', async (req, res) => {
     const post = new postModel ({
@@ -25,6 +21,15 @@ router.post('/', async (req, res) => {
     }
 });
 
+//GET ALL POST FORM THE DATABASE
+router.get('/', async (req, res) => {
+    try {
+        const posts = await postModel.find();
+        res.json(posts);
+    } catch(err) {
+        res.json({message : err});
+    }
+});
 
 
 module.exports = router;
