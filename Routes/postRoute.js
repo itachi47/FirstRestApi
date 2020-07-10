@@ -31,5 +31,14 @@ router.get('/', async (req, res) => {
     }
 });
 
+//GET A SPECIFIC POST FROM THE DATABASE USING MONGO ID
+router.get('/:postId', async (req, res) => {
+    try {
+        const post = await postModel.findById(req.params.postId);
+        res.json(post);
+    } catch(err) {
+        res.json({message : err});
+    }
+});
 
 module.exports = router;
